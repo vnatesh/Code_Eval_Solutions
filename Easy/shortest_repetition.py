@@ -27,7 +27,7 @@ Print out the smallest period of the input string. E.g.
 
 """
 
-import sys,string,itertools,re
+import sys
 test_cases=open(sys.argv[1],'r')
 for i in test_cases.read().split('\n'):
     if i!='':
