@@ -16,6 +16,7 @@ For example:
 
 3 5 10
 2 7 15
+
 OUTPUT SAMPLE:
 
 Print out the series 1 through N replacing numbers divisible by X with “F”, numbers divisible by Y with “B” and numbers divisible by both with “FB”. Since the input file contains multiple sets of values, your output should print out one line per set. Ensure that there are no trailing empty spaces in each line you print.
@@ -32,3 +33,19 @@ The number of test cases ≤ 20
 "N" is in range [21, 100]
 
 """
+
+import sys,string
+test_cases=open(sys.argv[1],'r')
+for i in test_cases.read().split('\n'):
+    if i!='':
+        a=map(int,i.split(' '))
+        w=range(1,a[2]+1)
+        line=[]
+        for q in w:
+            if q%a[0]==0 and q%a[1]!=0: line.append('F')
+            elif q%a[1]==0 and q%a[0]!=0: line.append('B')
+            elif q%a[0]==q%a[1]==0: line.append('FB')
+            else: line.append(q)
+        print ' '.join(map(str,line))
+
+
