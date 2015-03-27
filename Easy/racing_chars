@@ -1,0 +1,92 @@
+"""
+In this challenge you will be given a file where each line is a section of a race track with obstructions, gates and checkpoints. The goal is to find a way of passing this track, using the following rules: 
+Each section contains only a single gate or a gate with a checkpoint. 
+The race car can ride only through gates or checkpoints. 
+You should prefer driving through checkpoint rather then a gate. 
+The obstructions are represented by "#" (hash). 
+The gates are represented by "_" (underscore). 
+The checkpoints are represented by "C" .
+
+INPUT SAMPLE:
+
+Your program should accept as its first argument a path to a filename. Each line in this file is a new segment of a race track. E.g.
+
+#########_##
+########C_##
+#######_####
+######_#C###
+#######_C###
+#######_####
+######C#_###
+######C_####
+#######_####
+#######_####
+
+OUTPUT SAMPLE:
+
+Print out the way of passing this race track starting from the first line of the file. Use a "|" (pipe) for the straight, use a "/" (forward slash) for the left turn and use a "\" (back slash) for the right turn. E.g.
+
+#########|##
+########/_##
+#######/####
+######_#\###
+#######_|###
+#######/####
+######/#_###
+######|_####
+#######\####
+#######|####
+
+Constraints: 
+The number of lines in a file is 50. 
+The width of a section is 12 chars.
+
+
+"""
+
+import sys,string
+test_cases=open(sys.argv[1],'r')
+
+#list1=[]
+
+test_cases=test_cases.read().split('\n')
+if '_' in test_cases[0]:
+    q=test_cases[0].find('_')
+    print test_cases[0].replace('_','|')
+ #   list1.append(test_cases[0].replace('_','|'))
+elif 'C' in test_cases[0]:
+    q=test_cases[0].find('C')
+    print test_cases[0].replace('C','|')
+ #   list1.append(test_cases[0].replace('C','|'))
+
+test_cases=test_cases[1:]
+i=0
+while i<len(test_cases):
+    if 'C' in test_cases[i]:
+        if test_cases[i].find('C')<q:
+            q=test_cases[i].find('C')
+            print test_cases[i].replace('C','/')
+ #           list1.append(test_cases[i].replace('C','/'))
+        elif test_cases[i].find('C')>q:
+            q=test_cases[i].find('C')
+            print test_cases[i].replace('C','\\')
+        else:
+            print test_cases[i].replace('C','|')
+            
+ #           list1.append(test_cases[i].replace('C','\\'))
+        i+=1
+    else:
+        if test_cases[i].find('_')<q:
+            q=test_cases[i].find('_')
+            print test_cases[i].replace('_','/')
+ #           list1.append(test_cases[i].replace('_','/'))
+        elif test_cases[i].find('_')>q:
+            q=test_cases[i].find('_')
+            print test_cases[i].replace('_','\\')
+ #           list1.append(test_cases[i].replace('_','\\'))
+        else:
+            print test_cases[i].replace('_','|')
+        i+=1
+
+#for j in list1: print j
+        
